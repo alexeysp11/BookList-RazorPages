@@ -1,0 +1,16 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Login Page</h1>
+    <h2>Please enter your login and password</h2>
+    
+    <form method="post">
+        <button class="btn-outline-success" id="login-btn" asp-area="" asp-page="/Auth/Login">
+            Log In
+        </button>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+.vs 
+.vscode 
+
+# Documentation 
+Docs/ProcessDocs
+
+# Unfinished modules 
+BookList.Services
+BookList.Models
