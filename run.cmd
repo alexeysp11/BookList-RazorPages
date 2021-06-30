@@ -1,3 +1,3 @@
 @echo off 
 
-dotnet run --project ./Source/BookList.csproj 
+dotnet run --project ./BookList/Source/BookList.csproj 
