@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\bin\Debug\netstandard2.0\Security.deps.json
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\bin\Debug\netstandard2.0\Security.dll
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\bin\Debug\netstandard2.0\Security.pdb
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\obj\Debug\netstandard2.0\Security.csprojAssemblyReference.cache
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\obj\Debug\netstandard2.0\Security.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\obj\Debug\netstandard2.0\Security.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\obj\Debug\netstandard2.0\Security.AssemblyInfo.cs
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\obj\Debug\netstandard2.0\Security.dll
+C:\Users\User\Desktop\projects\AspNetCore\BookList\Security\Source\obj\Debug\netstandard2.0\Security.pdb
