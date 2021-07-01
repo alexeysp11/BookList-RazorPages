@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\BookList.Models\BookList.Models.csproj" />
+    <ProjectReference Include="..\..\BookList.Models\BookList.Models.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookList", "BookList\Source
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookList.Models", "BookList.Models\BookList.Models.csproj", "{2B9124C4-B3D6-48D2-8B41-26B9D6ABF223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookList.Services", "BookList.Services\BookList.Services.csproj", "{2775F2AC-7A63-48CF-9C2C-B7663A52D9A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookList.Services", "BookList.Services\Source\BookList.Services.csproj", "{2775F2AC-7A63-48CF-9C2C-B7663A52D9A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Services", "BookList.Services\Tests\Tests.Services.csproj", "{2775F2AC-7A63-48CF-9C2C-B7663A52D9A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Security\Source\Security.csproj", "{2775F2AC-7A63-48CF-9C2C-B7663A52D9A4}"
 EndProject

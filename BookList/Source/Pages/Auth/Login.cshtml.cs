@@ -13,14 +13,12 @@ namespace BookList.Pages
     public class LoginModel : PageModel 
     {
         private readonly ILogger _logger; 
-        private IUserRepository _MockUserRepository; 
 
         private string Message { get; set; }
 
         public LoginModel(ILogger<LoginModel> logger)
         {
             _logger = logger; 
-            _MockUserRepository = new MockUserRepository(); 
         }
 
         public void OnGet()
@@ -41,25 +39,18 @@ namespace BookList.Pages
                 Message = $"{fullname} tries to log in."; 
                 _logger.LogInformation(Message); 
 
-                // Get list of users inside MockUserRepository. 
-                User currentUser = null; 
-                List<User> users = _MockUserRepository.GetUsers(); 
-                if (users == null)
-                {
-                    Message = "No users in the MockUserRepository"; 
-                    _logger.LogInformation(Message); 
-                    return; 
-                }
+                MockUserRepository _MockUserRepository = Repository.MockUserRepositoryInstance; 
 
-                // Find user in the list of users. 
-                foreach (var user in users)
-                {
-                    if (user.Fullname == fullname && user.Password == password)
-                    {
-                        currentUser = user; 
-                        break; 
-                    }
+                // Get user inside MockUserRepository. 
+                User currentUser = null; 
+                try
+                {    
+                    currentUser = _MockUserRepository.GetUser(fullname, password); 
                 }
+                catch (System.Exception e)
+                {
+                    _logger.LogWarning($"Exception: {e}"); 
+                } 
 
                 // Log information. 
                 if (currentUser != null)
@@ -70,12 +61,12 @@ namespace BookList.Pages
                 else
                 {
                     Message = $"User {fullname} was not found."; 
-                    _logger.LogInformation(Message); 
+                    _logger.LogWarning(Message); 
                 }
             }
             else
             {
-                Message = "OnPost method"; 
+                Message = string.Empty; 
             }
         }
     }

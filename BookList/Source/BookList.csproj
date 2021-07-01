@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BookList.Models\BookList.Models.csproj" />
-    <ProjectReference Include="..\..\BookList.Services\BookList.Services.csproj" />
+    <ProjectReference Include="..\..\BookList.Services\Source\BookList.Services.csproj" />
     <ProjectReference Include="..\..\Security\Source\Security.csproj" />
   </ItemGroup>
 

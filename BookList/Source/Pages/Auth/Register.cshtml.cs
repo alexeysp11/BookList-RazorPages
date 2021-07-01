@@ -13,7 +13,7 @@ namespace BookList.Pages
     public class RegisterModel : PageModel 
     {
         private readonly ILogger _logger; 
-        private IUserRepository _MockUserRepository; 
+        MockUserRepository _MockUserRepository; 
 
         private string Message { get; set; }
 
@@ -27,7 +27,7 @@ namespace BookList.Pages
             Message = "Get used";
         }
         
-        public void OnPost(string fullname, string country, string city, 
+        public IActionResult OnPost(string fullname, string country, string city, 
             string password)
         {
             // Get if input values are correct. 
@@ -35,6 +35,8 @@ namespace BookList.Pages
             bool isCountryCorrect = (country != string.Empty && country != null);
             bool isCityCorrect = (city != string.Empty && city != null);
             bool isPasswordCorrect = (password != string.Empty && password != null);
+
+            _MockUserRepository = new MockUserRepository(); 
 
             // Process fields. 
             if (isFullnameCorrect && isCountryCorrect && isCityCorrect && 
@@ -44,46 +46,54 @@ namespace BookList.Pages
                 Message = $"User {fullname} ({city}, {country}) tries to create an account."; 
                 _logger.LogInformation(Message);
 
-                // Initialize an object of MockUserRepository. 
-                _MockUserRepository = new MockUserRepository(fullname, country, city, password); 
-
-                // Get list of users inside MockUserRepository. 
-                User currentUser = null; 
-                List<User> users = _MockUserRepository.GetUsers(); 
-                if (users == null)
+                // Get an instance of current user. 
+                User currentUser; 
+                try
                 {
-                    Message = "No users in the MockUserRepository"; 
-                    _logger.LogInformation(Message); 
-                    return; 
+                    currentUser = GetCurrentUser(fullname, country, city, password); 
+                    _logger.LogInformation($"User {fullname} ({city}, {country}) created an account successfully."); 
                 }
-
-                // Find user in the list of users. 
-                foreach (var user in users)
+                catch (System.Exception e)
                 {
-                    if (user.Fullname == fullname && user.Country == country 
-                        && user.City == city && user.Password == password)
-                    {
-                        currentUser = user; 
-                        break; 
-                    }
+                    _logger.LogWarning($"Exception: {e}"); 
+                    return RedirectToPage(); 
                 }
-
-                // Log information. 
-                if (currentUser != null)
-                {
-                    Message = $"{currentUser.Fullname} created an account successfully."; 
-                    _logger.LogInformation(Message); 
-                }
-                else
-                {
-                    Message = $"Error while getting back data from DB: User {fullname} was not found in the response."; 
-                    _logger.LogInformation(Message); 
-                }
+                Repository.MockUserRepositoryInstance = _MockUserRepository; 
+                _MockUserRepository = null; 
+                return RedirectToPage("Login"); 
             }
             else
             {
                 Message = string.Empty; 
             }
+            _MockUserRepository = null; 
+            return RedirectToPage(); 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fullname"></param>
+        /// <param name="country"></param>
+        /// <param name="city"></param>
+        /// <returns></returns>
+        private User GetCurrentUser(string fullname, string country, string city, 
+            string password)
+        {
+            User currentUser = null; 
+            try
+            {
+                _MockUserRepository.CreateUser(fullname, country, city, 
+                    password); 
+                currentUser = _MockUserRepository.GetUser(fullname, 
+                    password); 
+            }
+            catch (System.Exception e)
+            {
+                throw e; 
+            }
+
+            return currentUser;
         }
     }
 }

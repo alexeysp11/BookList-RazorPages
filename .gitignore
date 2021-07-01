@@ -6,6 +6,7 @@ Docs/ProcessDocs
 
 # Unfinished modules 
 BookList/Tests
+BookList.Services/Tests
 
 # Database 
 sqlite3.exe 

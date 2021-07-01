@@ -299,8 +299,8 @@
     },
     "BookList.Services/1.0.0": {
       "type": "project",
-      "path": "../../BookList.Services/BookList.Services.csproj",
-      "msbuildProject": "../../BookList.Services/BookList.Services.csproj"
+      "path": "../../BookList.Services/Source/BookList.Services.csproj",
+      "msbuildProject": "../../BookList.Services/Source/BookList.Services.csproj"
     },
     "Security/1.0.0": {
       "type": "project",
@@ -344,8 +344,8 @@
             "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
             },
-            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\BookList.Services.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\BookList.Services.csproj"
+            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj"
             },
             "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"
