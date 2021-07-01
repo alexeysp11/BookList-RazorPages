@@ -7,6 +7,7 @@ namespace BookList.Services
     {
         void CreateUser(string fullname, string country, string city, 
             string password); 
+        bool DoesExist(string fullname, string password); 
         User GetUser(); 
     }
 }

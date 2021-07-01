@@ -39,30 +39,31 @@ namespace BookList.Pages
                 Message = $"{fullname} tries to log in."; 
                 _logger.LogInformation(Message); 
 
-                MockUserRepository _MockUserRepository = Repository.MockUserRepositoryInstance; 
+                MockUserRepository _MockUserRepository; 
+                if (Repository.MockUserRepositoryInstance != null)
+                {
+                    _MockUserRepository = Repository.MockUserRepositoryInstance; 
+                }
+                else
+                {
+                    _MockUserRepository = new MockUserRepository(); 
+                    Repository.MockUserRepositoryInstance = _MockUserRepository; 
+                }
 
                 // Get user inside MockUserRepository. 
-                User currentUser = null; 
                 try
                 {    
-                    currentUser = _MockUserRepository.GetUser(fullname, password); 
+                    bool exists = _MockUserRepository.DoesExist(fullname, password); 
+                    if (!exists)
+                    {
+                        throw new System.Exception($"User {fullname} does not exist after inserting into the DB."); 
+                    }
+                    _logger.LogWarning($"User {fullname} successfully logged in."); 
                 }
                 catch (System.Exception e)
                 {
                     _logger.LogWarning($"Exception: {e}"); 
                 } 
-
-                // Log information. 
-                if (currentUser != null)
-                {
-                    Message = $"{currentUser.Fullname} logged in successfully."; 
-                    _logger.LogInformation(Message); 
-                }
-                else
-                {
-                    Message = $"User {fullname} was not found."; 
-                    _logger.LogWarning(Message); 
-                }
             }
             else
             {

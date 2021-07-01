@@ -11,7 +11,7 @@ namespace BookList.Services
         /// <summary>
         /// Path to the database 
         /// </summary>
-        private const string AbsolutePathToDb = "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\GoogleMaps\\Snippets\\SQLite\\DB.sqlite3"; 
+        private const string AbsolutePathToDb = "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Databases\\DB.sqlite3"; 
         #endregion  // Configuration settings
         
         #region Create methods
@@ -20,7 +20,7 @@ namespace BookList.Services
         /// </summary>
         public void CreateTables()
         {
-            string script = System.IO.File.ReadAllText("C:\\Users\\User\\Desktop\\projects\\AspNetCore\\GoogleMaps\\Snippets\\SQLite\\CreateTables.sql");
+            string script = System.IO.File.ReadAllText("C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\CreateTables.sql");
 
             var connectionStringBuilder = new SqliteConnectionStringBuilder(); 
             connectionStringBuilder.DataSource = AbsolutePathToDb;
@@ -156,5 +156,49 @@ namespace BookList.Services
             }
         }
         #endregion  // Update methods 
+
+        #region Read methods
+        /// <summary>
+        /// Checks if an element exists in the database. 
+        /// </summary>
+        /// <param name="readRequest">Request for reading data</param>
+        /// <returns></returns>
+        public bool DoesExist(string readRequest)
+        {
+            if (readRequest == string.Empty)
+            {
+                throw new System.Exception("Request cannot be empty"); 
+            }
+
+            bool exists = false; 
+            var connectionStringBuilder = new SqliteConnectionStringBuilder();
+            connectionStringBuilder.DataSource = AbsolutePathToDb;
+            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var selectCmd = connection.CreateCommand();
+                    selectCmd.CommandText = readRequest; 
+                    using (var reader = selectCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (reader.GetInt32(0) != 0)
+                            {
+                                exists = true; 
+                            }
+                        }
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw e; 
+                }
+            }
+            return exists; 
+        }
+        #endregion  // Read methods
     }
 }

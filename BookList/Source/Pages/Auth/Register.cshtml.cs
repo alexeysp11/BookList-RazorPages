@@ -13,7 +13,6 @@ namespace BookList.Pages
     public class RegisterModel : PageModel 
     {
         private readonly ILogger _logger; 
-        MockUserRepository _MockUserRepository; 
 
         private string Message { get; set; }
 
@@ -36,7 +35,16 @@ namespace BookList.Pages
             bool isCityCorrect = (city != string.Empty && city != null);
             bool isPasswordCorrect = (password != string.Empty && password != null);
 
-            _MockUserRepository = new MockUserRepository(); 
+            MockUserRepository _MockUserRepository; 
+            if (Repository.MockUserRepositoryInstance != null)
+            {
+                _MockUserRepository = Repository.MockUserRepositoryInstance; 
+            }
+            else
+            {
+                _MockUserRepository = new MockUserRepository(); 
+                Repository.MockUserRepositoryInstance = _MockUserRepository; 
+            }
 
             // Process fields. 
             if (isFullnameCorrect && isCountryCorrect && isCityCorrect && 
@@ -46,11 +54,15 @@ namespace BookList.Pages
                 Message = $"User {fullname} ({city}, {country}) tries to create an account."; 
                 _logger.LogInformation(Message);
 
-                // Get an instance of current user. 
-                User currentUser; 
+                // Insert user into DB and get if it is inserted successfully. 
                 try
                 {
-                    currentUser = GetCurrentUser(fullname, country, city, password); 
+                    _MockUserRepository.CreateUser(fullname, country, city, password); 
+                    bool exists = _MockUserRepository.DoesExist(fullname, password); 
+                    if (!exists)
+                    {
+                        throw new System.Exception($"User {fullname} does not exist after inserting into the DB."); 
+                    }
                     _logger.LogInformation($"User {fullname} ({city}, {country}) created an account successfully."); 
                 }
                 catch (System.Exception e)
@@ -58,7 +70,6 @@ namespace BookList.Pages
                     _logger.LogWarning($"Exception: {e}"); 
                     return RedirectToPage(); 
                 }
-                Repository.MockUserRepositoryInstance = _MockUserRepository; 
                 _MockUserRepository = null; 
                 return RedirectToPage("Login"); 
             }
@@ -66,34 +77,7 @@ namespace BookList.Pages
             {
                 Message = string.Empty; 
             }
-            _MockUserRepository = null; 
             return RedirectToPage(); 
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fullname"></param>
-        /// <param name="country"></param>
-        /// <param name="city"></param>
-        /// <returns></returns>
-        private User GetCurrentUser(string fullname, string country, string city, 
-            string password)
-        {
-            User currentUser = null; 
-            try
-            {
-                _MockUserRepository.CreateUser(fullname, country, city, 
-                    password); 
-                currentUser = _MockUserRepository.GetUser(fullname, 
-                    password); 
-            }
-            catch (System.Exception e)
-            {
-                throw e; 
-            }
-
-            return currentUser;
         }
     }
 }

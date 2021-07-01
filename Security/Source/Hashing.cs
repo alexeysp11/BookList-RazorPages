@@ -10,7 +10,7 @@ namespace Security.Models
         /// </summary>
         /// <param name="username">String representation of username</param>
         /// <param name="password">String representation of password</param>
-        /// <returns>String </returns>
+        /// <returns>String of 16 characters</returns>
         public string HashFunc(string username, string password)
         {
             int coef = 2; 

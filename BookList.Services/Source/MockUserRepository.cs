@@ -5,13 +5,14 @@ namespace BookList.Services
 {
     public class MockUserRepository : IUserRepository 
     {
-        #region Private fields
+        #region Members
         /// <summary>
-        /// List of current users. 
+        /// Instance of database helper for interacting with SQLite DB  
         /// </summary>
-        /// <typeparam name="User"></typeparam>
-        /// <returns></returns>
-        private List<User> Users = new List<User>(); 
+        private SqliteDbHelper DbHelper; 
+        #endregion  // Members
+
+        #region Private fields
         /// <summary>
         /// Instance of the current user. 
         /// </summary>
@@ -24,13 +25,8 @@ namespace BookList.Services
         /// </summary>
         public MockUserRepository()
         {
-            this.Users.Add(new User() 
-            {
-                Fullname = "DefaultUser", 
-                Country = "England", 
-                City = "Manchester",  
-                Password = "DefaultPassword"
-            });
+            DbHelper = new SqliteDbHelper(); 
+            DbHelper.CreateTables(); 
         }
         #endregion  // Constructors
 
@@ -45,16 +41,40 @@ namespace BookList.Services
         public void CreateUser(string fullname, string country, string city, 
             string password)
         {
-            // Get if such user already exists (if yes, just return). 
+            // Insert city information. 
+            string insertCity = $@"INSERT INTO Cities (CityName) 
+                SELECT ('{city}')
+                WHERE (SELECT COUNT(1) FROM Cities WHERE CityName = '{city}') = 0;"; 
 
-            // Add user. 
-            this.Users.Add(new User() 
+            // Insert country information. 
+            string insertCounty = $@"INSERT INTO Countries (CountryName, CityIdFK) 
+                VALUES (
+                    '{country}', 
+                    (SELECT CityId FROM Cities WHERE CityName = '{city}')
+                );";  
+            string checkCountry = $@"SELECT COUNT (1) FROM Countries 
+                WHERE CountryName = '{country}';"; 
+
+            // Insert user information. 
+            string insertUser = $@"INSERT INTO Users (Fullname, CountryIdFK, Password) 
+                VALUES (
+                    '{fullname}', 
+                    (SELECT CountryId FROM Countries WHERE CountryName = '{country}'), 
+                    '{password}'
+                );";  
+            string checkUser = $@"SELECT COUNT (1) FROM Users 
+                WHERE Fullname = '{fullname}' AND Password = '{password}';"; 
+            
+            try
             {
-                Fullname = fullname, 
-                Country = country, 
-                City = city, 
-                Password = password
-            });
+                DbHelper.Insert(insertCity); 
+                DbHelper.Insert(insertCounty, checkCountry); 
+                DbHelper.Insert(insertUser, checkUser); 
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
         /// <summary>
@@ -63,33 +83,21 @@ namespace BookList.Services
         /// <param name="fullname">String value of fullname of the user</param>
         /// <param name="password">String value of password of the user</param>
         /// <returns>Instance of User class</returns>
-        public User GetUser(string fullname, string password)
+        public bool DoesExist(string fullname, string password)
         {
-            User currentUser = null; 
-
-            // Find user in the list of users. 
-            foreach (var user in Users)
+            string checkUser = $@"SELECT COUNT (1) FROM Users 
+                WHERE Fullname = '{fullname}' AND Password = '{password}';"; 
+            
+            bool exists = false; 
+            try
             {
-                try
-                {
-                    if (user.Fullname == fullname && user.Password == password)
-                    {
-                        currentUser = user; 
-                        break; 
-                    }
-                }
-                catch (System.Exception e)
-                {
-                    throw e;
-                }
+                exists = DbHelper.DoesExist(checkUser); 
             }
-
-            if (currentUser == null)
+            catch (System.Exception e)
             {
-                throw new System.ArgumentNullException("User cannot be null"); 
+                throw e;
             }
-
-            return currentUser; 
+            return exists; 
         }
 
         /// <summary>
