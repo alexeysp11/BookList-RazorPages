@@ -12,11 +12,28 @@ namespace BookList.Pages
 {
     public class LoginModel : PageModel 
     {
-        public string Greeting { get; set; } = "Hello"; 
+        public string Message { get; private set; } = "Default message"; 
 
         public void OnGet()
         {
+            Message = "Default message"; 
+        }
 
+        public void OnPost(string fullname, string password)
+        {
+            // Get if input values are correct. 
+            bool isFullnameCorrect = (fullname != string.Empty && fullname != null);
+            bool isPasswordCorrect = (password != string.Empty && password != null);
+            
+            // Process fields. 
+            if (isFullnameCorrect && isPasswordCorrect)
+            {
+                Message = $"{fullname} tries to log in"; 
+            }
+            else
+            {
+                Message = "OnPost method"; 
+            }
         }
     }
 }

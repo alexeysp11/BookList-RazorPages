@@ -6,10 +6,15 @@
 
 <div class="text-center">
     <h1 class="display-4">Login Page</h1>
+    <br>
     <h2>Please enter your login and password</h2>
+    <p>Message: @Model.Message</p>
     
     <form method="post">
-        <input type="submit" id="login-btn" asp-area="" 
-            asp-page="/Auth/Login" value="Log In">
+        <input type="text" name="fullname" placeholder="Fullname"> 
+        <br>
+        <input type="password" name="password" placeholder="Password"> 
+        <br>
+        <input type="submit">
     </form>
 </div>
