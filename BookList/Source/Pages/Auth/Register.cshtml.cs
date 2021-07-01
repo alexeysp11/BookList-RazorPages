@@ -12,7 +12,15 @@ namespace BookList.Pages
 {
     public class RegisterModel : PageModel 
     {
-        public string Message { get; private set; }
+        private readonly ILogger _logger; 
+        private IUserRepository _MockUserRepository; 
+
+        private string Message { get; set; }
+
+        public RegisterModel(ILogger<RegisterModel> logger)
+        {
+            _logger = logger; 
+        }
 
         public void OnGet()
         {
@@ -32,11 +40,49 @@ namespace BookList.Pages
             if (isFullnameCorrect && isCountryCorrect && isCityCorrect && 
                 isPasswordCorrect)
             {
-                Message = $"User {fullname} from {city} ({country}) tries to create an account"; 
+                // Log information that user tries to create an account. 
+                Message = $"User {fullname} ({city}, {country}) tries to create an account."; 
+                _logger.LogInformation(Message);
+
+                // Initialize an object of MockUserRepository. 
+                _MockUserRepository = new MockUserRepository(fullname, country, city, password); 
+
+                // Get list of users inside MockUserRepository. 
+                User currentUser = null; 
+                List<User> users = _MockUserRepository.GetUsers(); 
+                if (users == null)
+                {
+                    Message = "No users in the MockUserRepository"; 
+                    _logger.LogInformation(Message); 
+                    return; 
+                }
+
+                // Find user in the list of users. 
+                foreach (var user in users)
+                {
+                    if (user.Fullname == fullname && user.Country == country 
+                        && user.City == city && user.Password == password)
+                    {
+                        currentUser = user; 
+                        break; 
+                    }
+                }
+
+                // Log information. 
+                if (currentUser != null)
+                {
+                    Message = $"{currentUser.Fullname} created an account successfully."; 
+                    _logger.LogInformation(Message); 
+                }
+                else
+                {
+                    Message = $"Error while getting back data from DB: User {fullname} was not found in the response."; 
+                    _logger.LogInformation(Message); 
+                }
             }
             else
             {
-                Message = "OnPost method"; 
+                Message = string.Empty; 
             }
         }
     }
