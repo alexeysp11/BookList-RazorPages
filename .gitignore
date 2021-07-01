@@ -8,3 +8,6 @@ Docs/ProcessDocs
 BookList/Tests
 BookList.Services
 BookList.Models
+
+# Database 
+sqlite3.exe 

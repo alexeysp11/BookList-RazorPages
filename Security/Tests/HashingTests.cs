@@ -15,6 +15,17 @@ namespace Tests.Security.Models
         private Hashing hashing; 
         #endregion  // Members
 
+        #region Values for authentication
+        /// <summary>
+        /// Username for authentication tesitng using hash function. 
+        /// </summary>
+        private string username = "TestUser"; 
+        /// <summary>
+        /// Password for authentication tesitng using hash function
+        /// </summary>
+        private string password = "TestPassword"; 
+        #endregion  // Values for authentication
+
         [SetUp]
         public void Setup()
         {
@@ -22,46 +33,43 @@ namespace Tests.Security.Models
         }
 
         [Test]
-        public void HashFunc_OneStringPassedTwice_SameOutput()
+        public void HashFunc_SameUsernameSamePasswordMultipleTimes_SameOutput()
         {
             // Assign. 
-            string input = "StringForTestingHashFunc"; 
+            string sameUsername = username; 
+            string samePassword = password; 
 
             // Act. 
-            string output1 = hashing.HashFunc(input); 
-            string output2 = hashing.HashFunc(input); 
+            string output1 = hashing.HashFunc(username, password); 
+            string output2 = hashing.HashFunc(username, password); 
+            string output3 = hashing.HashFunc(sameUsername, samePassword); 
+            string output4 = hashing.HashFunc(username, samePassword); 
+            string output5 = hashing.HashFunc(sameUsername, password); 
 
             // Assert. 
             Assert.AreEqual(output1, output2);
+            Assert.AreEqual(output1, output3);
+            Assert.AreEqual(output1, output4);
+            Assert.AreEqual(output1, output5);
+            Assert.AreEqual(output2, output3);
+            Assert.AreEqual(output2, output4);
+            Assert.AreEqual(output2, output5);
+            Assert.AreEqual(output3, output4);
+            Assert.AreEqual(output3, output5);
+            Assert.AreEqual(output4, output5);
         }
 
         [Test]
-        public void HashFunc_SameStringPassed_SameOutput()
+        public void HashFunc_SameUsernameDifferentPassword_DifferentOutput()
         {
             // Assign. 
-            string input1 = "StringForTestingHashFunc"; 
-            string input2 = "StringForTestingHashFunc"; 
+            string wrongPassword1 = "StringForTestingHashFunc1"; 
+            string wrongPassword2 = $"{password}SomeAddition"; 
 
             // Act. 
-            string output1 = hashing.HashFunc(input1); 
-            string output2 = hashing.HashFunc(input2); 
-
-            // Assert. 
-            Assert.AreEqual(output1, output2);
-        }
-
-        [Test]
-        public void HashFunc_DifferentStringsPassed_DifferentOutput()
-        {
-            // Assign. 
-            string input1 = "StringForTestingHashFunc1"; 
-            string input2 = "DiffernetStringForTesting"; 
-            string input3 = "AnotherString"; 
-
-            // Act. 
-            string output1 = hashing.HashFunc(input1); 
-            string output2 = hashing.HashFunc(input2); 
-            string output3 = hashing.HashFunc(input3); 
+            string output1 = hashing.HashFunc(username, username); 
+            string output2 = hashing.HashFunc(username, wrongPassword1); 
+            string output3 = hashing.HashFunc(username, wrongPassword2); 
 
             // Assert. 
             Assert.AreNotEqual(output1, output2);
