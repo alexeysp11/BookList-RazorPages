@@ -14,8 +14,6 @@ namespace BookList.Pages
     {
         private readonly ILogger _logger; 
 
-        private string Message { get; set; }
-
         public LoginModel(ILogger<LoginModel> logger)
         {
             _logger = logger; 
@@ -36,38 +34,22 @@ namespace BookList.Pages
             if (isFullnameCorrect && isPasswordCorrect)
             {
                 // Log information that user tries to login. 
-                Message = $"{fullname} tries to log in."; 
-                _logger.LogInformation(Message); 
+                _logger.LogInformation($"{fullname} tries to log in."); 
 
-                MockUserRepository _MockUserRepository; 
-                if (Repository.MockUserRepositoryInstance != null)
-                {
-                    _MockUserRepository = Repository.MockUserRepositoryInstance; 
-                }
-                else
-                {
-                    _MockUserRepository = new MockUserRepository(); 
-                    Repository.MockUserRepositoryInstance = _MockUserRepository; 
-                }
-
-                // Get user inside MockUserRepository. 
+                // Get user inside Database. 
                 try
                 {    
-                    bool exists = _MockUserRepository.DoesExist(fullname, password); 
+                    bool exists = Repository.UserRepositoryInstance.DoesExist(fullname, password); 
                     if (!exists)
                     {
-                        throw new System.Exception($"User {fullname} does not exist after inserting into the DB."); 
+                        throw new System.Exception($"User {fullname} does not exist in the DB."); 
                     }
                     _logger.LogWarning($"User {fullname} successfully logged in."); 
                 }
                 catch (System.Exception e)
                 {
                     _logger.LogWarning($"Exception: {e}"); 
-                } 
-            }
-            else
-            {
-                Message = string.Empty; 
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ using BookList.Models;
 
 namespace BookList.Services
 {
-    public class MockUserRepository : IUserRepository 
+    public class UserRepository : IUserRepository 
     {
         #region Members
         /// <summary>
@@ -23,7 +23,7 @@ namespace BookList.Services
         /// <summary>
         /// Constructor that initilizes the user by default. 
         /// </summary>
-        public MockUserRepository()
+        public UserRepository()
         {
             DbHelper = new SqliteDbHelper(); 
             DbHelper.CreateTables(); 
@@ -32,7 +32,7 @@ namespace BookList.Services
 
         #region Methods
         /// <summary>
-        /// 
+        /// Creates the user if does not exist in the DB (SQL requests are used)
         /// </summary>
         /// <param name="fullname">String value of fullname of the user</param>
         /// <param name="country">String value of country of the user</param>
@@ -78,7 +78,7 @@ namespace BookList.Services
         }
 
         /// <summary>
-        /// Allows to get current active user. 
+        /// Allows to get current active user using SQL request. 
         /// </summary>
         /// <param name="fullname">String value of fullname of the user</param>
         /// <param name="password">String value of password of the user</param>

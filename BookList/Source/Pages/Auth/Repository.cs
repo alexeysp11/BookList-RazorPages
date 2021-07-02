@@ -12,24 +12,23 @@ namespace BookList.Pages
         /// <summary>
         /// private static field for storing an instance of MockUserRepository. 
         /// </summary>
-        private static MockUserRepository mockUserRepository;
+        private static IUserRepository userRepository = null;
         #endregion  // Fields
 
         #region Properties
         /// <summary>
-        /// Property for getting and setting an instance of MockUserRepository class. 
+        /// Property for getting an instance of UserRepository class. 
         /// </summary>
-        /// <value>Public for getting and setting (sets only if private field
-        /// is null)</value>
-        public static MockUserRepository MockUserRepositoryInstance
+        /// <value>Public readonly property</value>
+        public static IUserRepository UserRepositoryInstance
         {
-            get { return mockUserRepository; }
-            set 
+            get 
             {
-                if (mockUserRepository == null)
+                if (userRepository == null)
                 {
-                    mockUserRepository = value; 
+                    userRepository = new UserRepository(); 
                 }
+                return userRepository;
             }
         }
         #endregion  // Properties
