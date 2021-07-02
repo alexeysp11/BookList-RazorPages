@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims; 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication; 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using BookList.Models;
 using BookList.Services; 
@@ -24,7 +28,7 @@ namespace BookList.Pages
             
         }
 
-        public void OnPost(string fullname, string password)
+        public async Task<IActionResult> OnPostAsync(string fullname, string password)
         {
             // Get if input values are correct. 
             bool isFullnameCorrect = (fullname != string.Empty && fullname != null);
@@ -33,24 +37,47 @@ namespace BookList.Pages
             // Process fields. 
             if (isFullnameCorrect && isPasswordCorrect)
             {
-                // Log information that user tries to login. 
                 _logger.LogInformation($"{fullname} tries to log in."); 
-
-                // Get user inside Database. 
+                
                 try
-                {    
+                {
+                    // Verify the credentials.  
                     bool exists = Repository.UserRepositoryInstance.DoesExist(fullname, password); 
                     if (!exists)
                     {
                         throw new System.Exception($"User {fullname} does not exist in the DB."); 
                     }
-                    _logger.LogWarning($"User {fullname} successfully logged in."); 
+
+                    // Creating the security context. 
+                    var claims = new List<Claim> 
+                    {
+                        new Claim(ClaimTypes.Name, fullname), 
+                        new Claim(ClaimTypes.Role, "User")
+                    };
+                    var identity = new ClaimsIdentity(claims, 
+                        CookieAuthenticationDefaults.AuthenticationScheme); 
+                    var authProperties = new AuthenticationProperties
+                    {
+                        ExpiresUtc = System.DateTimeOffset.UtcNow.AddMinutes(5),
+                        IsPersistent = true
+                    };
+                    
+                    // Sign in. 
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme, 
+                        new ClaimsPrincipal(identity), 
+                        authProperties);
+                    
+                    string path = "../Books/Books"; 
+                    _logger.LogInformation($"User {fullname} successfully logged in (redicted to {path})"); 
+                    return RedirectToPage(path); 
                 }
                 catch (System.Exception e)
                 {
                     _logger.LogWarning($"Exception: {e}"); 
                 }
             }
+            return Page(); 
         }
     }
 }
