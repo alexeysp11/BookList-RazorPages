@@ -69,7 +69,18 @@ namespace BookList.Pages
                         authProperties);
                     
                     string path = "../Books/Books"; 
+                    
+                    // Create new instance of the user in the repository. 
+                    Repository.UserRepositoryInstance.AuthenticateUser(fullname); 
+                    User user = Repository.UserRepositoryInstance.GetUser(); 
+                    if (user == null || user.Fullname != fullname)
+                    {
+                        throw new System.Exception($"User {fullname} cannot be assigned in the UserRepository (instance is either null or empty)."); 
+                    }
+
+                    Repository.IsAuthenticated = true; 
                     _logger.LogInformation($"User {fullname} successfully logged in (redicted to {path})"); 
+
                     return RedirectToPage(path); 
                 }
                 catch (System.Exception e)

@@ -10,9 +10,13 @@ namespace BookList.Pages
     {
         #region Fields
         /// <summary>
-        /// private static field for storing an instance of MockUserRepository. 
+        /// Private static field for storing an instance of MockUserRepository. 
         /// </summary>
         private static IUserRepository userRepository = null;
+        /// <summary>
+        /// Private static field for getting if the user is athenticated. 
+        /// </summary>
+        private static bool isAuthenticated = false; 
         #endregion  // Fields
 
         #region Properties
@@ -29,6 +33,18 @@ namespace BookList.Pages
                     userRepository = new UserRepository(); 
                 }
                 return userRepository;
+            }
+        }
+        /// <summary>
+        /// Gets and sets if an user is authenticated 
+        /// </summary>
+        /// <value>Public property for getting and setting isAuthenticated</value>
+        public static bool IsAuthenticated 
+        {
+            get { return isAuthenticated; }
+            set
+            {
+                isAuthenticated = value; 
             }
         }
         #endregion  // Properties

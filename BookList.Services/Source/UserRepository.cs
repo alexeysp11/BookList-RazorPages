@@ -101,6 +101,26 @@ namespace BookList.Services
         }
 
         /// <summary>
+        /// Assigns an instance of the user
+        /// </summary>
+        /// <param name="fullname">String value of the user's fullname</param>
+        public void AuthenticateUser(string fullname)
+        {
+            UserObj = new User()
+            {
+                Fullname = fullname
+            }; 
+        }
+
+        /// <summary>
+        /// Sets an instance of the user equal to null. 
+        /// </summary>
+        public void LogOutUser()
+        {
+            UserObj = null; 
+        }
+
+        /// <summary>
         /// Allows to get current active user. 
         /// </summary>
         /// <returns>Instance of User class</returns>
