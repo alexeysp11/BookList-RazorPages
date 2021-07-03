@@ -572,8 +572,8 @@
     },
     "BookList.Models/1.0.0": {
       "type": "project",
-      "path": "../../BookList.Models/BookList.Models.csproj",
-      "msbuildProject": "../../BookList.Models/BookList.Models.csproj"
+      "path": "../../BookList.Models/Source/BookList.Models.csproj",
+      "msbuildProject": "../../BookList.Models/Source/BookList.Models.csproj"
     },
     "Security/1.0.0": {
       "type": "project",
@@ -615,8 +615,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
+            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj"
             },
             "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"

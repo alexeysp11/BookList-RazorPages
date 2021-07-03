@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BookList.Models\BookList.Models.csproj" />
+    <ProjectReference Include="..\..\BookList.Models\Source\BookList.Models.csproj" />
     <ProjectReference Include="..\..\BookList.Services\Source\BookList.Services.csproj" />
   </ItemGroup>
 

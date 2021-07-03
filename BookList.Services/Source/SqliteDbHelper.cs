@@ -5,14 +5,33 @@ namespace BookList.Services
     /// <summary>
     /// Allows to interact with the database. 
     /// </summary>
-    public class SqliteDbHelper
+    public class SqliteDbHelper : IDbHelper
     {
         #region Configuration settings
         /// <summary>
-        /// Path to the database 
+        /// Private field for storing path to the database 
         /// </summary>
-        private const string AbsolutePathToDb = "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Databases\\DB.sqlite3"; 
+        private string AbsolutePathToDb;
         #endregion  // Configuration settings
+
+        #region Constructors
+        /// <summary>
+        /// Default constructor for SqliteDbHelper
+        /// </summary>
+        public SqliteDbHelper()
+        {
+            AbsolutePathToDb = "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Databases\\DB.sqlite3"; 
+        }
+
+        /// <summary>
+        /// Constuctor for initializing path to the database 
+        /// </summary>
+        /// <param name="absolutePathToDb">Absolute path to the database</param>
+        public SqliteDbHelper(string absolutePathToDb)
+        {
+            AbsolutePathToDb = absolutePathToDb; 
+        }
+        #endregion  // Constructors
         
         #region Create methods
         /// <summary>
@@ -20,6 +39,7 @@ namespace BookList.Services
         /// </summary>
         public void CreateTables()
         {
+            // Get request for creating tables in the database.
             string script = System.IO.File.ReadAllText("C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\CreateTables.sql");
 
             var connectionStringBuilder = new SqliteConnectionStringBuilder(); 
@@ -212,8 +232,8 @@ namespace BookList.Services
         {
             string readRequest = $@"SELECT Users.Fullname, Countries.CountryName, Cities.CityName
                 FROM Users
-                INNER JOIN Countries ON Users.CountryIdFK = Countries.CountryId
-                INNER JOIN Cities ON Countries.CityIdFK = Cities.CityId
+                INNER JOIN Cities ON Users.CityIdFK = Cities.CityId
+                INNER JOIN Countries ON Cities.CountryIdFK = Countries.CountryId
                 WHERE Users.Fullname = '{fullname}' AND Users.Password = '{password}';"; 
 
             country = string.Empty; 

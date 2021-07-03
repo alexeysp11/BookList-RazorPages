@@ -4,14 +4,14 @@
     "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList\\Source\\BookList.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
+    "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj",
         "projectName": "BookList.Models",
-        "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
+              "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj"
               },
               "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
                 "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"
@@ -148,8 +148,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
+              "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj"
               },
               "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj": {
                 "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj"

@@ -50,8 +50,7 @@ namespace BookList.Pages
                     _logger.LogWarning($"Exception: {e}"); 
                 }
             }
-            
-            return Page(); 
+            return RedirectToPage(); 
         }
     }
 }

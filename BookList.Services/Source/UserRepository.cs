@@ -10,7 +10,7 @@ namespace BookList.Services
         /// <summary>
         /// Instance of database helper for interacting with SQLite DB  
         /// </summary>
-        private SqliteDbHelper DbHelper; 
+        private IDbHelper DbHelper; 
         #endregion  // Members
 
         #region Private fields
@@ -27,6 +27,15 @@ namespace BookList.Services
         public UserRepository()
         {
             DbHelper = new SqliteDbHelper(); 
+            DbHelper.CreateTables(); 
+        }
+
+        /// <summary>
+        /// Constructor that initilizes the user by default. 
+        /// </summary>
+        public UserRepository(IDbHelper dbHelper)
+        {
+            DbHelper = dbHelper; 
             DbHelper.CreateTables(); 
         }
         #endregion  // Constructors
@@ -51,25 +60,25 @@ namespace BookList.Services
                 throw e;
             }
 
-            // Requests for city information. 
-            string insertCity = $@"INSERT INTO Cities (CityName) 
-                SELECT ('{city}')
-                WHERE (SELECT COUNT(1) FROM Cities WHERE CityName = '{city}') = 0;"; 
-
             // Requests for country information. 
-            string insertCounty = $@"INSERT INTO Countries (CountryName, CityIdFK) 
+            string insertCounty = $@"INSERT INTO Countries (CountryName) 
+                SELECT ('{country}')
+                WHERE (SELECT COUNT(1) FROM Countries WHERE CountryName = '{country}') = 0;"; 
+
+            // Requests for city information. 
+            string insertCity = $@"INSERT INTO Cities (CityName, CountryIdFK) 
                 VALUES (
-                    '{country}', 
-                    (SELECT CityId FROM Cities WHERE CityName = '{city}')
+                    '{city}', 
+                    (SELECT CountryId FROM Countries WHERE CountryName = '{country}')
                 );";  
-            string checkCountry = $@"SELECT COUNT (1) FROM Countries 
-                WHERE CountryName = '{country}';"; 
+            string checkCity = $@"SELECT COUNT (1) FROM Cities 
+                WHERE CityName = '{city}';"; 
 
             // Requests for user information. 
-            string insertUser = $@"INSERT INTO Users (Fullname, CountryIdFK, Password) 
+            string insertUser = $@"INSERT INTO Users (Fullname, CityIdFK, Password) 
                 VALUES (
                     '{fullname}', 
-                    (SELECT CountryId FROM Countries WHERE CountryName = '{country}'), 
+                    (SELECT CityId FROM Cities WHERE CityName = '{city}'), 
                     '{password}'
                 );";  
             string checkUser = $@"SELECT COUNT (1) FROM Users 
@@ -77,8 +86,8 @@ namespace BookList.Services
             
             try
             {
-                DbHelper.Insert(insertCity); 
-                DbHelper.Insert(insertCounty, checkCountry); 
+                DbHelper.Insert(insertCounty); 
+                DbHelper.Insert(insertCity, checkCity); 
                 DbHelper.Insert(insertUser, checkUser); 
             }
             catch (System.Exception e)

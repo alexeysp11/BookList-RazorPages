@@ -381,7 +381,7 @@
 									"font": "Arial;13;1",
 									"left": 24,
 									"top": 45,
-									"width": 167.2236328125,
+									"width": 167.25537109375,
 									"height": 13,
 									"text": "UsersBooks"
 								},
@@ -407,7 +407,7 @@
 											"font": "Arial;13;0",
 											"left": 29,
 											"top": 68,
-											"width": 157.2236328125,
+											"width": 157.25537109375,
 											"height": 13
 										},
 										{
@@ -422,7 +422,7 @@
 											"font": "Arial;13;0",
 											"left": 29,
 											"top": 83,
-											"width": 157.2236328125,
+											"width": 157.25537109375,
 											"height": 13
 										},
 										{
@@ -437,21 +437,21 @@
 											"font": "Arial;13;0",
 											"left": 29,
 											"top": 98,
-											"width": 157.2236328125,
+											"width": 157.25537109375,
 											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 24,
 									"top": 63,
-									"width": 167.2236328125,
+									"width": 167.25537109375,
 									"height": 53
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 24,
 							"top": 40,
-							"width": 167.2236328125,
+							"width": 167.25537109375,
 							"height": 76,
 							"nameLabel": {
 								"$ref": "AAAAAAF6YptXOYhb6Kg="
@@ -724,7 +724,7 @@
 									"top": 357,
 									"width": 220.44873046875,
 									"height": 13,
-									"text": "Countries"
+									"text": "Cities"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -901,9 +901,9 @@
 									"font": "Arial;13;1",
 									"left": 296,
 									"top": 389,
-									"width": 195.1787109375,
+									"width": 220.44873046875,
 									"height": 13,
-									"text": "Cities"
+									"text": "Countries"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -927,7 +927,7 @@
 											"font": "Arial;13;0",
 											"left": 301,
 											"top": 412,
-											"width": 185.1787109375,
+											"width": 210.44873046875,
 											"height": 13
 										},
 										{
@@ -942,21 +942,21 @@
 											"font": "Arial;13;0",
 											"left": 301,
 											"top": 427,
-											"width": 185.1787109375,
+											"width": 210.44873046875,
 											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 296,
 									"top": 407,
-									"width": 195.1787109375,
+									"width": 220.44873046875,
 									"height": 38
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 296,
 							"top": 384,
-							"width": 195.1787109375,
+							"width": 220.44873046875,
 							"height": 61,
 							"nameLabel": {
 								"$ref": "AAAAAAF6YrBLYYlwAEw="
@@ -1114,7 +1114,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF6Ypq3hogx41E="
 							},
-							"name": "CountyIdFK",
+							"name": "CityIdFK",
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
@@ -1337,7 +1337,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF6YpqTi4gsOYE="
 					},
-					"name": "Countries",
+					"name": "Cities",
 					"ownedElements": [
 						{
 							"_type": "ERDRelationship",
@@ -1402,7 +1402,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF6YqwjP4k0oZk="
 							},
-							"name": "CountyId",
+							"name": "CityId",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": true
@@ -1413,7 +1413,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF6YqwjP4k0oZk="
 							},
-							"name": "CountryName",
+							"name": "CityName",
 							"type": "VARCHAR",
 							"length": "50"
 						},
@@ -1423,7 +1423,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF6YqwjP4k0oZk="
 							},
-							"name": "CityIdFK",
+							"name": "CountryIdFK",
 							"type": "INTEGER",
 							"length": 0,
 							"foreignKey": true
@@ -1436,7 +1436,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF6YpqTi4gsOYE="
 					},
-					"name": "Cities",
+					"name": "Countries",
 					"columns": [
 						{
 							"_type": "ERDColumn",
@@ -1444,7 +1444,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF6YrBLX4ltnw4="
 							},
-							"name": "CityId",
+							"name": "CountyId",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": true
@@ -1455,7 +1455,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF6YrBLX4ltnw4="
 							},
-							"name": "CityName",
+							"name": "CountryName",
 							"type": "VARCHAR",
 							"length": "50"
 						}

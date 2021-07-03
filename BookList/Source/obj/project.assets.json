@@ -295,8 +295,8 @@
     },
     "BookList.Models/1.0.0": {
       "type": "project",
-      "path": "../../BookList.Models/BookList.Models.csproj",
-      "msbuildProject": "../../BookList.Models/BookList.Models.csproj"
+      "path": "../../BookList.Models/Source/BookList.Models.csproj",
+      "msbuildProject": "../../BookList.Models/Source/BookList.Models.csproj"
     },
     "BookList.Services/1.0.0": {
       "type": "project",
@@ -341,8 +341,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
+            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\Source\\BookList.Models.csproj"
             },
             "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj"

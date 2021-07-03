@@ -11,21 +11,21 @@ CREATE TABLE IF NOT EXISTS UsersBooks (
 CREATE TABLE IF NOT EXISTS Users (
     UserId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
     Fullname VARCHAR(50), 
-    CountryIdFK INTEGER, 
-    Password VARCHAR(50), 
-    FOREIGN KEY(CountryIdFK) REFERENCES Countries(CountryId)
-);
-
-CREATE TABLE IF NOT EXISTS Countries (
-    CountryId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-    CountryName VARCHAR(50), 
     CityIdFK INTEGER, 
+    Password VARCHAR(50), 
     FOREIGN KEY(CityIdFK) REFERENCES Cities(CityId)
-); 
+);
 
 CREATE TABLE IF NOT EXISTS Cities (
     CityId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-    CityName VARCHAR(50)
+    CityName VARCHAR(50),
+    CountryIdFK INTEGER, 
+    FOREIGN KEY(CountryIdFK) REFERENCES Countries(CountryId)
+); 
+
+CREATE TABLE IF NOT EXISTS Countries (
+    CountryId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    CountryName VARCHAR(50)
 ); 
 
 -- Tables for representing information about the books. 
