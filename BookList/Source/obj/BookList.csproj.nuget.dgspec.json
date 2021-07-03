@@ -84,6 +84,9 @@
             "projectReferences": {
               "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
                 "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
+              },
+              "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"
               }
             }
           }
@@ -150,9 +153,6 @@
               },
               "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj": {
                 "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj"
-              },
-              "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"
               }
             }
           }

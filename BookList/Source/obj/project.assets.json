@@ -150,7 +150,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "BookList.Models": "1.0.0",
-          "Microsoft.Data.Sqlite": "3.1.0"
+          "Microsoft.Data.Sqlite": "3.1.0",
+          "Security": "1.0.0"
         },
         "compile": {
           "bin/placeholder/BookList.Services.dll": {}
@@ -311,8 +312,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "BookList.Models >= 1.0.0",
-      "BookList.Services >= 1.0.0",
-      "Security >= 1.0.0"
+      "BookList.Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -346,9 +346,6 @@
             },
             "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Source\\BookList.Services.csproj"
-            },
-            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"
             }
           }
         }

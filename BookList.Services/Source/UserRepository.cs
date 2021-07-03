@@ -1,5 +1,6 @@
 using System.Collections.Generic; 
 using BookList.Models; 
+using Security.Models; 
 
 namespace BookList.Services
 {
@@ -41,12 +42,16 @@ namespace BookList.Services
         public void CreateUser(string fullname, string country, string city, 
             string password)
         {
-            // Insert city information. 
+            // Encrypt password. 
+            SubstitutionCipher cipher = new SubstitutionCipher(); 
+            password = cipher.Monoalphabetic(password); 
+
+            // Requests for city information. 
             string insertCity = $@"INSERT INTO Cities (CityName) 
                 SELECT ('{city}')
                 WHERE (SELECT COUNT(1) FROM Cities WHERE CityName = '{city}') = 0;"; 
 
-            // Insert country information. 
+            // Requests for country information. 
             string insertCounty = $@"INSERT INTO Countries (CountryName, CityIdFK) 
                 VALUES (
                     '{country}', 
@@ -55,7 +60,7 @@ namespace BookList.Services
             string checkCountry = $@"SELECT COUNT (1) FROM Countries 
                 WHERE CountryName = '{country}';"; 
 
-            // Insert user information. 
+            // Requests for user information. 
             string insertUser = $@"INSERT INTO Users (Fullname, CountryIdFK, Password) 
                 VALUES (
                     '{fullname}', 
@@ -85,6 +90,10 @@ namespace BookList.Services
         /// <returns>Instance of User class</returns>
         public bool DoesExist(string fullname, string password)
         {
+            // Encrypt password. 
+            SubstitutionCipher cipher = new SubstitutionCipher(); 
+            password = cipher.Monoalphabetic(password); 
+
             string checkUser = $@"SELECT COUNT (1) FROM Users 
                 WHERE Fullname = '{fullname}' AND Password = '{password}';"; 
             

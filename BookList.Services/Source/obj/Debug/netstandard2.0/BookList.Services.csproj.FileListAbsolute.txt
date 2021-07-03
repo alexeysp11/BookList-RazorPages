@@ -22,3 +22,5 @@ C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList.Services\Source\obj\
 C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList.Services\Source\obj\Debug\netstandard2.0\BookList.Services.csproj.CopyComplete
 C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList.Services\Source\obj\Debug\netstandard2.0\BookList.Services.dll
 C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList.Services\Source\obj\Debug\netstandard2.0\BookList.Services.pdb
+C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList.Services\Source\bin\Debug\netstandard2.0\Security.dll
+C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList.Services\Source\bin\Debug\netstandard2.0\Security.pdb

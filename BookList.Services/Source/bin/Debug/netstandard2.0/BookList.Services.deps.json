@@ -11,7 +11,8 @@
         "dependencies": {
           "BookList.Models": "1.0.0",
           "Microsoft.Data.Sqlite": "3.1.0",
-          "NETStandard.Library": "2.0.3"
+          "NETStandard.Library": "2.0.3",
+          "Security": "1.0.0"
         },
         "runtime": {
           "BookList.Services.dll": {}
@@ -117,6 +118,11 @@
         "runtime": {
           "BookList.Models.dll": {}
         }
+      },
+      "Security/1.0.0": {
+        "runtime": {
+          "Security.dll": {}
+        }
       }
     }
   },
@@ -211,6 +217,11 @@
       "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
     },
     "BookList.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Security/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

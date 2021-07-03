@@ -198,6 +198,16 @@
         "runtime": {
           "bin/placeholder/BookList.Models.dll": {}
         }
+      },
+      "Security/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Security.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Security.dll": {}
+        }
       }
     }
   },
@@ -564,13 +574,19 @@
       "type": "project",
       "path": "../../BookList.Models/BookList.Models.csproj",
       "msbuildProject": "../../BookList.Models/BookList.Models.csproj"
+    },
+    "Security/1.0.0": {
+      "type": "project",
+      "path": "../../Security/Source/Security.csproj",
+      "msbuildProject": "../../Security/Source/Security.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "BookList.Models >= 1.0.0",
       "Microsoft.Data.Sqlite >= 3.1.0",
-      "NETStandard.Library >= 2.0.3"
+      "NETStandard.Library >= 2.0.3",
+      "Security >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -601,6 +617,9 @@
           "projectReferences": {
             "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Models\\BookList.Models.csproj"
+            },
+            "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\Security\\Source\\Security.csproj"
             }
           }
         }
