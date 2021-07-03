@@ -199,6 +199,51 @@ namespace BookList.Services
             }
             return exists; 
         }
+
+        /// <summary>
+        /// Gets fullname, country and city of the user with SQL request  
+        /// </summary>
+        /// <param name="fullname">String value of the user's fullname</param>
+        /// <param name="country">Output string value of the country</param>
+        /// <param name="city">Output string value of the city</param>
+        /// <param name="password">String value of the user's password</param>
+        public void GetInfoAboutUser(string fullname, out string country, 
+            out string city, string password)
+        {
+            string readRequest = $@"SELECT Users.Fullname, Countries.CountryName, Cities.CityName
+                FROM Users
+                INNER JOIN Countries ON Users.CountryIdFK = Countries.CountryId
+                INNER JOIN Cities ON Countries.CityIdFK = Cities.CityId
+                WHERE Users.Fullname = '{fullname}' AND Users.Password = '{password}';"; 
+
+            country = string.Empty; 
+            city = string.Empty; 
+
+            var connectionStringBuilder = new SqliteConnectionStringBuilder();
+            connectionStringBuilder.DataSource = AbsolutePathToDb;
+            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var selectCmd = connection.CreateCommand();
+                    selectCmd.CommandText = readRequest; 
+                    using (var reader = selectCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            country = reader.GetString(1); 
+                            city = reader.GetString(2);
+                        }
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw e; 
+                }
+            }
+        }
         #endregion  // Read methods
     }
 }

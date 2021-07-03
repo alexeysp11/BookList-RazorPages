@@ -71,7 +71,7 @@ namespace BookList.Pages
                     string path = "../Books/Books"; 
                     
                     // Create new instance of the user in the repository. 
-                    Repository.UserRepositoryInstance.AuthenticateUser(fullname); 
+                    Repository.UserRepositoryInstance.AuthenticateUser(fullname, password); 
                     User user = Repository.UserRepositoryInstance.GetUser(); 
                     if (user == null || user.Fullname != fullname)
                     {

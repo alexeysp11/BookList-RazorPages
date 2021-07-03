@@ -42,9 +42,14 @@ namespace BookList.Services
         public void CreateUser(string fullname, string country, string city, 
             string password)
         {
-            // Encrypt password. 
-            SubstitutionCipher cipher = new SubstitutionCipher(); 
-            password = cipher.Monoalphabetic(password); 
+            try
+            {
+                EncryptPassword(ref password); 
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
 
             // Requests for city information. 
             string insertCity = $@"INSERT INTO Cities (CityName) 
@@ -90,9 +95,22 @@ namespace BookList.Services
         /// <returns>Instance of User class</returns>
         public bool DoesExist(string fullname, string password)
         {
-            // Encrypt password. 
-            SubstitutionCipher cipher = new SubstitutionCipher(); 
-            password = cipher.Monoalphabetic(password); 
+            // Get if input strings are correct. 
+            bool isFullnameCorrect = (fullname != null && fullname != string.Empty); 
+            bool isPasswordCorrect = (password != null && password != string.Empty); 
+            if (!isFullnameCorrect || !isPasswordCorrect)
+            {
+                throw new System.Exception("Unable to athenticate user in the repository (string cannot be empty or null)."); 
+            }
+
+            try
+            {
+                EncryptPassword(ref password); 
+            }
+            catch (System.Exception e)
+            {
+                throw e; 
+            }
 
             string checkUser = $@"SELECT COUNT (1) FROM Users 
                 WHERE Fullname = '{fullname}' AND Password = '{password}';"; 
@@ -113,11 +131,39 @@ namespace BookList.Services
         /// Assigns an instance of the user
         /// </summary>
         /// <param name="fullname">String value of the user's fullname</param>
-        public void AuthenticateUser(string fullname)
+        public void AuthenticateUser(string fullname, string password)
         {
+            // Get if input strings are correct. 
+            bool isFullnameCorrect = (fullname != null && fullname != string.Empty); 
+            bool isPasswordCorrect = (password != null && password != string.Empty); 
+            if (!isFullnameCorrect || !isPasswordCorrect)
+            {
+                throw new System.Exception("Unable to athenticate user in the repository (string cannot be empty or null)."); 
+            }
+
+            // Encrypt password and get if the user exists in the DB. 
+            try
+            {
+                if ( !DoesExist(fullname, password) )
+                {
+                    throw new System.Exception($"Unable to athenticate user in the repository (user {fullname} does not exist in the DB)."); 
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+
+            // Get data about the user from DB. 
+            string country = string.Empty; 
+            string city = string.Empty; 
+            EncryptPassword(ref password); 
+            DbHelper.GetInfoAboutUser(fullname, out country, out city, password); 
+
+            // Create an instance of the user. 
             UserObj = new User()
             {
-                Fullname = fullname
+                Fullname = fullname, Country = country, City = city 
             }; 
         }
 
@@ -136,6 +182,24 @@ namespace BookList.Services
         public User GetUser()
         {
             return UserObj; 
+        }
+
+        /// <summary>
+        /// Allows to encrypt password 
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        private void EncryptPassword(ref string password)
+        {
+            SubstitutionCipher cipher = new SubstitutionCipher(); 
+            try
+            {
+                password = cipher.Monoalphabetic(password); 
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
         #endregion  // Methods
     }

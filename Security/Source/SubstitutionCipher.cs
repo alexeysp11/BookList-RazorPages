@@ -12,6 +12,11 @@ namespace Security.Models
         /// <returns>Encrypted string</returns>
         public string Monoalphabetic(string input)
         {
+            if (input == null || input == string.Empty)
+            {
+                throw new System.Exception("Unable to use Monoalphabetic (input string cannot be null or empty)."); 
+            }
+
             byte[] bytes = System.Text.Encoding.ASCII.GetBytes(input);
 
             for (int i = 0; i < bytes.Length; i++)

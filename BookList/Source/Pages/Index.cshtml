@@ -10,6 +10,11 @@
 
     @if (Repository.IsAuthenticated)
     {
+        <div>
+            <p>Fullname: @Repository.UserRepositoryInstance.GetUser().Fullname</p>
+            <p>Country: @Repository.UserRepositoryInstance.GetUser().Country</p>
+            <p>City: @Repository.UserRepositoryInstance.GetUser().City</p>
+        </div>
         <form method="post">
             <input type="submit" id="logout-btn" value="Log Out">
         </form>
