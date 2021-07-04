@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tmtLGU1xIYUhaQCmmszsucL3p2QH0wq+iiP+SiynNaA5/nGYnK9XPr8+MNkyHKCRB8qAMPdc5a0+feUeeDcxKA==",
+  "dgSpecHash": "W389HBX3w/QUy9q+SOdqVvy6RUBNcJtA0UsRMrthLR0OtqL2amSzTDh+p/e0f2IpUcB/AZ0v0QRaBj4WV5gq1w==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Desktop\\projects\\AspNetCore\\BookList\\BookList.Services\\Tests\\Tests.Services.csproj",
   "expectedPackageFiles": [

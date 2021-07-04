@@ -17,21 +17,21 @@
         }
         else
         {
-            <table style="width:80%">
-                <tr>
-                    <th>No.</th>
-                    <th>Name</th>
-                    <th>Description</th>
+            <table style="width:80%; border: 1px solid black;">
+                <tr style="border: 1px solid black;">
+                    <th style="border: 1px solid black;">No.</th>
+                    <th style="border: 1px solid black;">Name</th>
+                    <th style="border: 1px solid black;">Description</th>
                 </tr>
 
                 @{
                     int index = 1; 
                     foreach (var book in books)
                     {
-                        <tr>
-                            <td>@index</td>
-                            <td><i>@Html.DisplayFor(modelItem => book.Name)</i> by <i>@Html.DisplayFor(modelItem => book.Author)</i></td>
-                            <td>@Html.DisplayFor(modelItem => book.Desciption)</td>
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">@index</td>
+                            <td style="border: 1px solid black;"><i>@Html.DisplayFor(modelItem => book.Name)</i> by <i>@Html.DisplayFor(modelItem => book.Author)</i></td>
+                            <td style="border: 1px solid black;">@Html.DisplayFor(modelItem => book.Desciption)</td>
                         </tr>
                         index++; 
                     }
@@ -45,6 +45,7 @@
         <p>Exception: @e</p>
     }
 
+    <br>
     <form method="post">
         <input type="submit" asp-page-handler="AddNewBook" value="Add new book">
     </form>

@@ -9,6 +9,7 @@
       "Tests.Services/1.0.0": {
         "dependencies": {
           "BookList.Services": "1.0.0",
+          "Microsoft.Data.Sqlite": "3.1.0",
           "Microsoft.NET.Test.Sdk": "16.5.0",
           "coverlet.collector": "1.2.0",
           "xunit": "2.4.0",
