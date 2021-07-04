@@ -28,6 +28,8 @@ This app consists of several projects such as:
 - **BookList.Services**: classes for *Repository pattern* implementation and interacting with *SQLite* database; 
 - **Security**: classes for *hashing* and *substitution cipher*. 
 
+[Here](Docs/About.md) you can find some more information about the *structure of this app*. 
+
 <!--
 ## Code snippets 
 
