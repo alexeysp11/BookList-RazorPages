@@ -30,7 +30,7 @@ namespace BookList.Models
         /// List of the books that user reads 
         /// </summary>
         /// <value>Public property</value>
-        public List<Book> Books {get; set; } 
+        public List<Book> Books { get; set; } 
         #endregion  // Interests 
     }
 }
