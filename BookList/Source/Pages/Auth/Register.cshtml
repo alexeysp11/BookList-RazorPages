@@ -5,19 +5,27 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Register Page</h1>
-    <h2>Create an account</h2>
-    <br>
+    @if (Repository.IsAuthenticated)
+    {
+        <h1>Error</h1>
+        <p>You cannot access the register page (log out first).</p>
+    }
+    else
+    {
+        <h1 class="display-4">Register Page</h1>
+        <h2>Create an account</h2>
+        <br>
 
-    <form method="post">
-        <input type="text" name="fullname" placeholder="Fullname"> 
-        <br>
-        <input type="text" name="country" placeholder="Country"> 
-        <br>
-        <input type="text" name="city" placeholder="City"> 
-        <br>
-        <input type="password" name="password" placeholder="Password"> 
-        <br>
-        <input type="submit">
-    </form>
+        <form method="post">
+            <input type="text" name="fullname" placeholder="Fullname"> 
+            <br>
+            <input type="text" name="country" placeholder="Country"> 
+            <br>
+            <input type="text" name="city" placeholder="City"> 
+            <br>
+            <input type="password" name="password" placeholder="Password"> 
+            <br>
+            <input type="submit">
+        </form>
+    }
 </div>

@@ -4,6 +4,9 @@ using Security.Models;
 
 namespace BookList.Services
 {
+    /// <summary>
+    /// Class that allows users to interact with database 
+    /// </summary>
     public class UserRepository : IUserRepository 
     {
         #region Members
@@ -11,13 +14,17 @@ namespace BookList.Services
         /// Instance of database helper for interacting with SQLite DB  
         /// </summary>
         private IDbHelper DbHelper; 
-        #endregion  // Members
-
-        #region Private fields
         /// <summary>
         /// Instance of the current user. 
         /// </summary>
         private User UserObj = null; 
+        #endregion  // Members
+
+        #region Private fields
+        /// <summary>
+        /// Field that sores the user's password (delete it when the user logged out)
+        /// </summary>
+        private string Password; 
         #endregion  // Private fields
 
         #region Constructors
@@ -40,7 +47,7 @@ namespace BookList.Services
         }
         #endregion  // Constructors
 
-        #region Methods
+        #region Personal information
         /// <summary>
         /// Creates the user if does not exist in the DB (SQL requests are used)
         /// </summary>
@@ -86,6 +93,7 @@ namespace BookList.Services
             
             try
             {
+                // Insert all data into database. 
                 DbHelper.Insert(insertCounty); 
                 DbHelper.Insert(insertCity, checkCity); 
                 DbHelper.Insert(insertUser, checkUser); 
@@ -174,6 +182,10 @@ namespace BookList.Services
             {
                 Fullname = fullname, Country = country, City = city 
             }; 
+            UserObj.Books = new List<Book>();
+
+            // Store password. 
+            Password = password;
         }
 
         /// <summary>
@@ -181,6 +193,7 @@ namespace BookList.Services
         /// </summary>
         public void LogOutUser()
         {
+            Password = string.Empty; 
             UserObj = null; 
         }
 
@@ -192,11 +205,136 @@ namespace BookList.Services
         {
             return UserObj; 
         }
+        #endregion  // Personal information
 
+        #region Books 
+        /// <summary>
+        /// Allows to add new book into database. 
+        /// </summary>
+        /// <param name="name">String value of book's name</param>
+        /// <param name="author">String value of book's author</param>
+        /// <param name="description">String value of book's description</param>
+        public void AddNewBook(string name, string author, string description)
+        {
+            if (DbHelper == null)
+            {
+                throw new System.Exception("Database helper is not assigned."); 
+            }
+            if (UserObj == null)
+            {
+                throw new System.Exception("Non authenticated user cannot add new book."); 
+            }
+            if (UserObj.Books == null)
+            {
+                throw new System.Exception("List of books is not assigned."); 
+            }
+
+            // Request for author's information. 
+            string insertAuthor = $@"INSERT INTO Authors (AuthorName)
+                SELECT ('{author}')
+                WHERE (SELECT COUNT(1) FROM Authors WHERE AuthorName = '{author}') = 0;"; 
+            
+            // Requests for book's information. 
+            string insertBook = $@"INSERT INTO Books (BookName, AuthorIdFK, Description) 
+                VALUES (
+                    '{name}', 
+                    (SELECT AuthorId FROM Authors WHERE AuthorName = '{author}'), 
+                    '{description}'
+                );";  
+            string checkBook = $@"SELECT COUNT (1) FROM Books 
+                WHERE BookName = '{name}';"; 
+            
+            // Requests for information about users and books. 
+            string insertUserBook = $@"INSERT INTO UsersBooks (UserIdFK, BookIdFK) 
+                VALUES (
+                    (SELECT UserId FROM Users WHERE Fullname = '{UserObj.Fullname}' AND Password = '{Password}'), 
+                    (SELECT BookId FROM Books WHERE BookName = '{name}' 
+                        AND AuthorIdFK = (SELECT AuthorId 
+                            FROM Authors WHERE AuthorName = '{author}')
+                    ) 
+                );";  
+            string checkUserBook = $@"SELECT COUNT (1) FROM UsersBooks 
+                WHERE UserIdFK = (
+                    SELECT UserId 
+                    FROM Users 
+                    WHERE Fullname = '{UserObj.Fullname}' AND Password = '{Password}')
+                AND BookIdFK = (
+                    SELECT BookId 
+                    FROM Books 
+                    WHERE BookName = '{name}' 
+                        AND AuthorIdFK = (SELECT AuthorId FROM Authors WHERE AuthorName = '{author}')
+                );"; 
+            
+            try
+            {
+                // Insert all data into database. 
+                DbHelper.Insert(insertAuthor); 
+                DbHelper.Insert(insertBook, checkBook); 
+                DbHelper.Insert(insertUserBook, checkUserBook); 
+
+                // Add a book into list of books. 
+                UserObj.Books.Add(new Book(name, author, description)); 
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Allows to get all favorite books of the user 
+        /// </summary>
+        /// <returns>List of books</returns>
+        public List<Book> GetBookList()
+        {
+            List<Book> books; 
+            try
+            {
+                books = UserObj.Books; 
+                if (books == null)
+                {
+                    throw new System.Exception("Unable to get list of books."); 
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+            return books; 
+        }
+
+        /// <summary>
+        /// Allows to initialze list of books inside UserObj 
+        /// </summary>
+        public void GetBooksFromDb()
+        {
+            string request = $@"SELECT Books.BookName, Authors.AuthorName, Books.Description 
+                FROM UsersBooks 
+                INNER JOIN Books ON UsersBooks.BookIdFK = Books.BookId
+                INNER JOIN Authors ON Books.AuthorIdFK = Authors.AuthorId
+                WHERE UserIdFK = (
+                    SELECT UserId 
+                    FROM Users 
+                    WHERE Fullname = '{UserObj.Fullname}' AND Password = '{Password}');"; 
+            UserObj.Books = DbHelper.GetBooksFromDb(request); 
+        }
+
+        public void EditBook()
+        {
+            // Edit a specified book inside a list and database. 
+        }
+
+        public void DeleteBook()
+        {
+            // Delete a specified book from the list and database.  
+        }
+        #endregion  // Books
+
+        #region Security
         /// <summary>
         /// Allows to encrypt password 
         /// </summary>
-        /// <param name="password"></param>
+        /// <param name="password">Reference to the string value of password</param>
         /// <returns></returns>
         private void EncryptPassword(ref string password)
         {
@@ -210,6 +348,6 @@ namespace BookList.Services
                 throw e;
             }
         }
-        #endregion  // Methods
+        #endregion  // Security
     }
 }

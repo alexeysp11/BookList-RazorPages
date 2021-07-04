@@ -1,3 +1,5 @@
+using System.Collections.Generic; 
+
 namespace BookList.Models
 {
     /// <summary>
@@ -5,6 +7,7 @@ namespace BookList.Models
     /// </summary>
     public class User
     {
+        #region Personal information
         /// <summary>
         /// Fullname of an authenticated user. 
         /// </summary>
@@ -20,5 +23,14 @@ namespace BookList.Models
         /// </summary>
         /// <value>Public property</value>
         public string City { get; set; }
+        #endregion  // Personal information
+
+        #region Interests 
+        /// <summary>
+        /// List of the books that user reads 
+        /// </summary>
+        /// <value>Public property</value>
+        public List<Book> Books {get; set; } 
+        #endregion  // Interests 
     }
 }

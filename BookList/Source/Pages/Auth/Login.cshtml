@@ -5,15 +5,23 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Login Page</h1>
-    <h2>Please enter your login and password</h2>
-    <br>
-    
-    <form method="post">
-        <input type="text" name="fullname" placeholder="Fullname"> 
+    @if (Repository.IsAuthenticated)
+    {
+        <h1>Error</h1>
+        <p>You cannot access the login page (log out first).</p>
+    }
+    else
+    {
+        <h1 class="display-4">Login Page</h1>
+        <h2>Please enter your login and password</h2>
         <br>
-        <input type="password" name="password" placeholder="Password"> 
-        <br>
-        <input type="submit">
-    </form>
+        
+        <form method="post">
+            <input type="text" name="fullname" placeholder="Fullname"> 
+            <br>
+            <input type="password" name="password" placeholder="Password"> 
+            <br>
+            <input type="submit">
+        </form>
+    }
 </div>

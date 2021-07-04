@@ -1,3 +1,6 @@
+using System.Collections.Generic; 
+using BookList.Models; 
+
 namespace BookList.Services
 {
     /// <summary>
@@ -15,5 +18,7 @@ namespace BookList.Services
         bool DoesExist(string readRequest); 
         void GetInfoAboutUser(string fullname, out string country, 
             out string city, string password); 
+        
+        List<Book> GetBooksFromDb(string readRequest); 
     }
 }

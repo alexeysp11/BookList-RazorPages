@@ -5,7 +5,47 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Books Page</h1>
-    <h2>Manage your favorite books</h2>
-    <br>
+    <h1 class="display-4">Your Books</h1>
+
+    @try
+    {
+        var books = Repository.UserRepositoryInstance.GetUser().Books; 
+        if (books == null || books.Count == 0)
+        {
+            <p>You don't have any favorite books.</p>
+            <p>Please, click on the button below to add your book.</p>
+        }
+        else
+        {
+            <table style="width:80%">
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+
+                @{
+                    int index = 1; 
+                    foreach (var book in books)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td><i>@Html.DisplayFor(modelItem => book.Name)</i> by <i>@Html.DisplayFor(modelItem => book.Author)</i></td>
+                            <td>@Html.DisplayFor(modelItem => book.Desciption)</td>
+                        </tr>
+                        index++; 
+                    }
+                }
+            </table>
+        }
+    }
+    catch (System.Exception e)
+    {
+        <p>Unable to draw the table.</p>
+        <p>Exception: @e</p>
+    }
+
+    <form method="post">
+        <input type="submit" asp-page-handler="AddNewBook" value="Add new book">
+    </form>
 </div>

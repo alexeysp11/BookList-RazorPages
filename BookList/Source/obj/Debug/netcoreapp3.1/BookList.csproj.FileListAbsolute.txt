@@ -122,3 +122,4 @@ C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList\Source\obj\Debug\net
 C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList\Source\obj\Debug\netcoreapp3.1\BookList.genruntimeconfig.cache
 C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList\Source\obj\Debug\netcoreapp3.1\Razor\Pages\Books\Books.cshtml.g.cs
 C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList\Source\obj\Debug\netcoreapp3.1\Razor\Pages\Auth\NonAuthenticated.cshtml.g.cs
+C:\Users\User\Desktop\projects\AspNetCore\BookList\BookList\Source\obj\Debug\netcoreapp3.1\Razor\Pages\Books\AddBook.cshtml.g.cs

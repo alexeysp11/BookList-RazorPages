@@ -11,5 +11,9 @@ namespace BookList.Services
         void AuthenticateUser(string fullname, string password); 
         void LogOutUser(); 
         User GetUser(); 
+
+        void AddNewBook(string name, string author, string description); 
+        List<Book> GetBookList(); 
+        void GetBooksFromDb(); 
     }
 }

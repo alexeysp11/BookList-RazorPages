@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.Sqlite; 
+﻿using System.Collections.Generic; 
+using Microsoft.Data.Sqlite; 
+using BookList.Models; 
 
 namespace BookList.Services
 {
@@ -263,6 +265,45 @@ namespace BookList.Services
                     throw e; 
                 }
             }
+        }
+
+        /// <summary>
+        /// Allows to get all books for a specific user. 
+        /// </summary>
+        /// <param name="readRequest">String value of SQL request for reading data from DB</param>
+        /// <returns>List of instances of Book class</returns>
+        public List<Book> GetBooksFromDb(string readRequest)
+        {
+            List<Book> books = new List<Book>(); 
+
+            var connectionStringBuilder = new SqliteConnectionStringBuilder();
+            connectionStringBuilder.DataSource = AbsolutePathToDb;
+            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var selectCmd = connection.CreateCommand();
+                    selectCmd.CommandText = readRequest; 
+                    using (var reader = selectCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string name = reader.GetString(0);
+                            string author = reader.GetString(1);
+                            string description = reader.GetString(2); 
+
+                            books.Add(new Book(name, author, description)); 
+                        }
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw e; 
+                }
+            }
+            return books; 
         }
         #endregion  // Read methods
     }

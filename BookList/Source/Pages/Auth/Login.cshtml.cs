@@ -80,6 +80,7 @@ namespace BookList.Pages
                     }
 
                     Repository.IsAuthenticated = true; 
+
                     _logger.LogInformation($"User {fullname} successfully logged in (redicted to {path})"); 
 
                     return RedirectToPage(path); 

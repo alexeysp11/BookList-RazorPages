@@ -16,7 +16,10 @@
             <p>City: @Repository.UserRepositoryInstance.GetUser().City</p>
         </div>
         <form method="post">
-            <input type="submit" id="logout-btn" value="Log Out">
+            <input type="submit" id="books-btn" asp-page-handler="Books" 
+                value="Books">
+            <input type="submit" id="logout-btn" asp-page-handler="LogOut" 
+                value="Log Out">
         </form>
     }
     else

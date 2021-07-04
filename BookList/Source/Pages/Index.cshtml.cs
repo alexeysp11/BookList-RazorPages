@@ -25,7 +25,7 @@ namespace BookList.Pages
 
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostLogOutAsync()
         {
             if (Repository.IsAuthenticated)
             {
@@ -51,6 +51,11 @@ namespace BookList.Pages
                 }
             }
             return RedirectToPage(); 
+        }
+
+        public IActionResult OnPostBooks()
+        {
+            return RedirectToPage("/Books/Books"); 
         }
     }
 }
