@@ -7,6 +7,10 @@ The app also incudes a simple *authentication system* for users.
 
 ![LoginPage](Docs/img/LoginPage.png)
 
+On the *Books page* you can manage the list of your favorite books: 
+
+![BooksPage](Docs/img/BooksPage.png)
+
 This app is written in `C#` using **ASP.NET Core** and **Razor Pages**. 
 
 ## How to use
@@ -23,6 +27,13 @@ This app is written in `C#` using **ASP.NET Core** and **Razor Pages**.
 - `xUnit` and `NUnit` for unit testing; 
 - `Microsoft.Extensions.Logging` for logging; 
 - `Microsoft.AspNetCore.Authentication.Cookies` for using cookies in authentication. 
+
+### Launching this app 
+
+In order to run this application, you need to type the following command into Windows command line: 
+```
+run.cmd
+```
 
 ## Software Architecture 
 
