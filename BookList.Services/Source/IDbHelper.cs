@@ -20,5 +20,6 @@ namespace BookList.Services
             out string city, string password); 
         
         List<Book> GetBooksFromDb(string readRequest); 
+        int GetBookId(string bookName); 
     }
 }

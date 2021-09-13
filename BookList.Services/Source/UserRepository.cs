@@ -271,9 +271,10 @@ namespace BookList.Services
                 DbHelper.Insert(insertAuthor); 
                 DbHelper.Insert(insertBook, checkBook); 
                 DbHelper.Insert(insertUserBook, checkUserBook); 
+                int bookId = DbHelper.GetBookId(name); 
 
                 // Add a book into list of books. 
-                UserObj.Books.Add(new Book(name, author, description)); 
+                UserObj.Books.Add(new Book(bookId, name, author, description)); 
             }
             catch (System.Exception e)
             {
@@ -308,7 +309,7 @@ namespace BookList.Services
         /// </summary>
         public void GetBooksFromDb()
         {
-            string request = $@"SELECT Books.BookName, Authors.AuthorName, Books.Description 
+            string request = $@"SELECT Books.BookId, Books.BookName, Authors.AuthorName, Books.Description 
                 FROM UsersBooks 
                 INNER JOIN Books ON UsersBooks.BookIdFK = Books.BookId
                 INNER JOIN Authors ON Books.AuthorIdFK = Authors.AuthorId

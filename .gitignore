@@ -4,6 +4,8 @@
 */.vscode 
 
 # Binaries
+*/bin
+*/obj
 */*/bin
 */*/obj
 

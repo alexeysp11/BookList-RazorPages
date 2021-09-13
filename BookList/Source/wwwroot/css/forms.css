@@ -16,3 +16,15 @@
     width: 40%;
     width: 20%;
 }
+
+.home-btn {
+    width: 100pt;
+    height: auto;
+}
+
+#sticky_buttons {
+    position: absolute;
+    top: 335px;
+    width: 850px; 
+    height: auto; 
+}

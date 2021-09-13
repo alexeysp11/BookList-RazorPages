@@ -267,6 +267,35 @@ namespace BookList.Services
             }
         }
 
+        public int GetBookId(string bookName)
+        {
+            int bookId = 0; 
+            var connectionStringBuilder = new SqliteConnectionStringBuilder();
+            connectionStringBuilder.DataSource = AbsolutePathToDb;
+            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    var selectCmd = connection.CreateCommand();
+                    selectCmd.CommandText = $"SELECT BookId FROM Books WHERE BookName LIKE '{bookName}'"; 
+                    using (var reader = selectCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            bookId = reader.GetInt32(0);
+                        }
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    throw e; 
+                }
+            }
+            return bookId; 
+        }
+
         /// <summary>
         /// Allows to get all books for a specific user. 
         /// </summary>
@@ -290,11 +319,12 @@ namespace BookList.Services
                     {
                         while (reader.Read())
                         {
-                            string name = reader.GetString(0);
-                            string author = reader.GetString(1);
-                            string description = reader.GetString(2); 
+                            int bookId = reader.GetInt32(0);
+                            string name = reader.GetString(1);
+                            string author = reader.GetString(2);
+                            string description = reader.GetString(3); 
 
-                            books.Add(new Book(name, author, description)); 
+                            books.Add(new Book(bookId, name, author, description)); 
                         }
                     }
                 }

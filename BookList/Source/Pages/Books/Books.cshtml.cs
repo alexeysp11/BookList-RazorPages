@@ -30,10 +30,23 @@ namespace BookList.Pages
             }
         }
 
-        public IActionResult OnPostAddNewBook()
+        public IActionResult OnPostAddBtn(string name, string author, int year, 
+            string description)
         {
-            _logger.LogInformation($"User {Repository.UserRepositoryInstance.GetUser().Fullname} wants to add new book."); 
-            return RedirectToPage("AddBook"); 
+            bool isNameCorrect = (name != null && name != string.Empty);
+            bool isAuthorCorrect = (author != null && author != string.Empty);
+            bool isYearCorrect = (year < 2021);
+            bool isDescriptionCorrect = (description != null && description != string.Empty);
+
+            if (isNameCorrect && isAuthorCorrect && isYearCorrect && 
+                isDescriptionCorrect)
+            {
+                Repository.UserRepositoryInstance.AddNewBook(name, author, description); 
+                
+                _logger.LogInformation($"Book is added by {Repository.UserRepositoryInstance.GetUser().Fullname}."); 
+                return RedirectToPage("Books");
+            }
+            return RedirectToPage(); 
         }
     }
 }
