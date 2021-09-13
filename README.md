@@ -3,6 +3,10 @@
 Application **BookList** is designed for creating and managing a table of *favorite books*. 
 The app also incudes a simple *authentication system* for users. 
 
+![HomePage](Docs/img/HomePage.png)
+
+![LoginPage](Docs/img/LoginPage.png)
+
 This app is written in `C#` using **ASP.NET Core** and **Razor Pages**. 
 
 ## How to use
