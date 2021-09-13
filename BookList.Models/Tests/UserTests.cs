@@ -73,6 +73,7 @@ namespace Tests.BookList.Models
         public void Initilize_SetNotEmptyList_GetSameValuesFromNotNullNotEmptyList()
         {
             // Arrange. 
+            int bookId = 1; 
             string bookName = "Name of a book"; 
             string author = "Some author"; 
             string description = "Some description for the book"; 
@@ -84,10 +85,11 @@ namespace Tests.BookList.Models
             // Act. 
             user.Books = new List<Book>() 
             {
-                new Book(bookName, author, description) 
+                new Book(bookId, bookName, author, description) 
             };
 
             // Assert. 
+            Assert.Equal(user.Books[0].BookId, bookId); 
             Assert.True(user.Books != null); 
             Assert.True(user.Books.Count > 0); 
             Assert.Equal(user.Books[0].Name, bookName); 
@@ -99,6 +101,7 @@ namespace Tests.BookList.Models
         public void Initilize_ChangeValuesInNotEmptyList_GetChangedValuesFromNotNullNotEmptyList()
         {
             // Arrange. 
+            int bookId = 1; 
             string bookName = "Name of a book"; 
             string author = "Some author"; 
             string description = "Some description for the book"; 
@@ -110,13 +113,15 @@ namespace Tests.BookList.Models
             // Act. 
             user.Books = new List<Book>() 
             {
-                new Book("bookName", "author", "description") 
+                new Book(bookId, "bookName", "author", "description") 
             };
+            user.Books[0].BookId = bookId; 
             user.Books[0].Name = bookName; 
             user.Books[0].Author = author; 
             user.Books[0].Desciption = description; 
 
             // Assert. 
+            Assert.Equal(user.Books[0].BookId, bookId); 
             Assert.True(user.Books != null); 
             Assert.True(user.Books.Count > 0); 
             Assert.Equal(user.Books[0].Name, bookName); 
