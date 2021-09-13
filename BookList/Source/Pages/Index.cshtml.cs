@@ -55,7 +55,7 @@ namespace BookList.Pages
 
         public IActionResult OnPostBooks()
         {
-            return RedirectToPage("/Books/Books"); 
+            return RedirectToPage("/Books"); 
         }
     }
 }

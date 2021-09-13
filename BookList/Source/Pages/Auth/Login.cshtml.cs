@@ -69,7 +69,7 @@ namespace BookList.Pages
                         new ClaimsPrincipal(identity), 
                         authProperties);
                     
-                    string path = "../Books/Books"; 
+                    string path = "../Books"; 
                     
                     // Create new instance of the user in the repository. 
                     Repository.UserRepositoryInstance.AuthenticateUser(fullname, password); 
@@ -81,7 +81,7 @@ namespace BookList.Pages
 
                     Repository.IsAuthenticated = true; 
 
-                    _logger.LogInformation($"User {fullname} successfully logged in (redicted to {path})"); 
+                    _logger.LogInformation($"User {fullname} successfully logged in (redicted to Books)"); 
 
                     return RedirectToPage(path); 
                 }

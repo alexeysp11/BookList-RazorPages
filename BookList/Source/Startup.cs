@@ -30,7 +30,7 @@ namespace BookList
             services.AddSingleton<IUserRepository, UserRepository>(); 
             services.AddRazorPages(options => 
             {
-                options.Conventions.AuthorizeFolder("/Books");
+                options.Conventions.AuthorizePage("/Books");
             });
 
             /*
