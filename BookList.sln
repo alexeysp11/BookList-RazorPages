@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookList", "BookList\Source\BookList.csproj", "{72074FBB-D55A-4815-BA98-CE0D3132D0EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookList.Models", "BookList.Models\Source\BookList.Models.csproj", "{2B9124C4-B3D6-48D2-8B41-26B9D6ABF223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookList.Models", "BookList.Models\Source\Models.csproj", "{2B9124C4-B3D6-48D2-8B41-26B9D6ABF223}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Models", "BookList.Models\Tests\Tests.Models.csproj", "{D4246D76-A9D4-4008-8279-FC32D534BCDE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookList.Services", "BookList.Services\Source\BookList.Services.csproj", "{2775F2AC-7A63-48CF-9C2C-B7663A52D9A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookList.Services", "BookList.Services\Source\Services.csproj", "{2775F2AC-7A63-48CF-9C2C-B7663A52D9A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Services", "BookList.Services\Tests\Tests.Services.csproj", "{486A547B-93E8-4581-9DBB-919F03B0EC38}"
 EndProject

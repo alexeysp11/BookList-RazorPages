@@ -32,8 +32,8 @@ namespace BookList.Pages
         public async Task<IActionResult> OnPostAsync(string fullname, string password)
         {
             // Get if input values are correct. 
-            bool isFullnameCorrect = (fullname != string.Empty && fullname != null);
-            bool isPasswordCorrect = (password != string.Empty && password != null);
+            bool isFullnameCorrect = (fullname != null && fullname != string.Empty);
+            bool isPasswordCorrect = (password != null && password != string.Empty);
             
             // Process fields. 
             if (isFullnameCorrect && isPasswordCorrect)

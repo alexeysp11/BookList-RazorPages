@@ -1,5 +1,11 @@
 .vs 
 .vscode 
+*/.vs
+*/.vscode 
+
+# Binaries
+*/*/bin
+*/*/obj
 
 # Documentation 
 Docs/ProcessDocs

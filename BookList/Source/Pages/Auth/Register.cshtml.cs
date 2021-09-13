@@ -29,10 +29,10 @@ namespace BookList.Pages
             string password)
         {
             // Get if input values are correct. 
-            bool isFullnameCorrect = (fullname != string.Empty && fullname != null);
-            bool isCountryCorrect = (country != string.Empty && country != null);
-            bool isCityCorrect = (city != string.Empty && city != null);
-            bool isPasswordCorrect = (password != string.Empty && password != null);
+            bool isFullnameCorrect = (fullname != null && fullname != string.Empty);
+            bool isCountryCorrect = (country != null && country != string.Empty);
+            bool isCityCorrect = (city != null && city != string.Empty);
+            bool isPasswordCorrect = (password != null && password != string.Empty);
 
             // Process fields. 
             if (isFullnameCorrect && isCountryCorrect && isCityCorrect && 

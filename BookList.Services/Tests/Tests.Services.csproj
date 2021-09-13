@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Source\BookList.Services.csproj" />
+    <ProjectReference Include="..\Source\Services.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
